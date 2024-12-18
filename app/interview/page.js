@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { ChatBox } from '../components/ChatBox';
 
-const page = () => {
+const Page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div className="min-h-screen bg-gray-500 flex items-center justify-center p-4">
+    <ChatBox/>
+  </div>
+  );
+};
 
-export default page
+export default Page;
