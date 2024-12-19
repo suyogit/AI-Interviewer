@@ -26,7 +26,7 @@ export function VideoInterview() {
             />
           </div>
         ) : (
-          <div className="w-16 flex flex-col items-center">
+          <div className="w-16 flex flex-col items-center my-auto">
             <button
               onClick={() => setIsCameraVisible(true)}
               className="p-4 rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors"

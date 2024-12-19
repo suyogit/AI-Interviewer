@@ -1,20 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { getServerSession } from "@/authActions";
-import { handleSignIn, handleSignOut } from "@/authActions";
-
+import { SignInButton,UserButton } from "@clerk/nextjs";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [session, setSession] = useState(null);
-
-  useEffect(() => {
-    async function fetchSession() {
-      const sessionData = await getServerSession();
-      setSession(sessionData);
-    }
-    fetchSession();
-  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -36,31 +25,17 @@ const Navbar = () => {
           menuOpen ? "flex" : "hidden"
         } flex-col gap-2 p-4 md:flex md:flex-row md:justify-center md:gap-6 md:p-2`}
       >
-        {session?.user ? (
-          <>
-            <Link href="/interview" className="hover:bg-[#0362C7] p-2 rounded">
-              Interview
-            </Link>
-
-            <Link
-              href={`/user/${session.user.id}`}
-              className="hover:bg-[#0362C7] p-2 rounded"
-            >
-              {session.user.name.split(" ")[0]}
-            </Link>
-            <form action={handleSignOut}>
-              <button type="submit" className="hover:bg-[#0362C7] p-2 rounded">
-                Logout
-              </button>
-            </form>
-          </>
-        ) : (
-          <form action={handleSignIn}>
-            <button type="submit" className="hover:bg-[#0362C7] p-2 rounded">
-              Login
-            </button>
-          </form>
-        )}
+        <Link href="/interview" className="hover:bg-[#0362C7] p-2 rounded">
+          Interview
+        </Link>
+        <Link href="/about" className="hover:bg-[#0362C7] p-2 rounded">
+          About
+        </Link>
+        <Link href="/contact" className="hover:bg-[#0362C7] p-2 rounded">
+          Contact
+        </Link>
+        <SignInButton mode='modal'/>
+        <UserButton/>
       </div>
     </>
   );
