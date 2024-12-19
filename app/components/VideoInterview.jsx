@@ -38,7 +38,7 @@ export function VideoInterview() {
         )}
 
         {/* Right Section - Chat */}
-        <div className={isCameraVisible ? "w-[400px]" : "flex-1 max-w-2xl mx-auto"}>
+        <div className={isCameraVisible ? "w-[800px]" : "flex-1 max-w-4xl mx-auto"}>
           <ChatBox />
         </div>
       </div>
