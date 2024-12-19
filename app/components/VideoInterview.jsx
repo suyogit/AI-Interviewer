@@ -14,8 +14,8 @@ export function VideoInterview() {
   };
 
   return (
-    <div className="container mx-auto h-[calc(100vh-6rem)]">
-      <div className="flex gap-4 h-full">
+    <div className="container mx-auto h-[calc(100vh-6rem)] ">
+      <div className="flex gap-4 h-full ">
         {/* Left Section - Video or Camera Button */}
         {isCameraVisible ? (
           <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
