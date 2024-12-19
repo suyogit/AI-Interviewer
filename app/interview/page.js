@@ -1,10 +1,11 @@
 import React from 'react';
 import { ChatBox } from '../components/ChatBox';
+import { VideoInterview } from '../components/VideoInterview';
 
 const Page = () => {
   return (
-    <div className="min-h-screen bg-gray-500 flex items-center justify-center p-4">
-    <ChatBox/>
+    <div className="min-h-screen bg-gray-100 p-4">
+    <VideoInterview />
   </div>
   );
 };

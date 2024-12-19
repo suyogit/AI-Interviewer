@@ -1,9 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import { Send } from 'lucide-react';
-import { chatData } from '@/chatData';
+import { chatData } from '../../chatData';
 import { ChatMessage } from './ChatMessage';
-
+import { MessageInput } from './MessageInput';
 export function ChatBox() {
   const [messages, setMessages] = useState(chatData);
   const [newMessage, setNewMessage] = useState('');
@@ -24,12 +23,12 @@ export function ChatBox() {
   };
 
   return (
-    <div className="flex flex-col h-[600px] w-full max-w-2xl bg-white rounded-lg shadow-lg">
+    <div className="flex flex-col h-full bg-white rounded-lg shadow-lg">
       {/* Chat Header */}
       <div className="flex items-center p-4 border-b">
         <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
         <div className="ml-3">
-          <h2 className="font-semibold text-black">Yogesh Aryal</h2>
+          <h2 className="font-semibold text-black">AI Interviewer</h2>
           <p className="text-sm text-gray-500">Online</p>
         </div>
       </div>
@@ -42,23 +41,11 @@ export function ChatBox() {
       </div>
 
       {/* Message Input */}
-      <form onSubmit={handleSendMessage} className="border-t p-4">
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type a message..."
-            className="flex-1 rounded-full px-4 py-2 border focus:outline-none focus:border-blue-500 text-black"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600 transition-colors"
-          >
-            <Send size={20} />
-          </button>
-        </div>
-      </form>
+      <MessageInput
+        value={newMessage}
+        onChange={setNewMessage}
+        onSubmit={handleSendMessage}
+      />
     </div>
   );
 }

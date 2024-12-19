@@ -1,6 +1,4 @@
-'use client';
 import React from 'react';
-import { Message } from '@/chatData';
 
 export function ChatMessage({ message }) {
   const isUser = message.sender === 'user';
@@ -15,7 +13,7 @@ export function ChatMessage({ message }) {
         }`}
       >
         <p className="text-sm">{message.text}</p>
-        <span className={`text-xs mt-1 block ${isUser ? 'text-blue-100' : 'text-gray-500'}`}>
+        <span className={`text-xs ${isUser ? 'text-blue-100' : 'text-gray-500'}`}>
           {message.timestamp}
         </span>
       </div>
