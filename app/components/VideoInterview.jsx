@@ -1,8 +1,8 @@
-"use client"
-import React, { useState } from 'react';
-import { ChatBox } from './ChatBox';
-import { VideoSection } from './VideoSection';
-import { Camera } from 'lucide-react';
+"use client";
+import React, { useState } from "react";
+import { EnhancedChatBox } from "./ChatBox";
+import { VideoSection } from "./VideoSection";
+import { Camera } from "lucide-react";
 
 export function VideoInterview() {
   const [isCameraVisible, setIsCameraVisible] = useState(false);
@@ -19,7 +19,7 @@ export function VideoInterview() {
         {/* Left Section - Video or Camera Button */}
         {isCameraVisible ? (
           <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
-            <VideoSection 
+            <VideoSection
               isCameraOn={isCameraOn}
               onToggleCamera={() => setIsCameraOn(!isCameraOn)}
               onEndCall={handleEndCall}
@@ -38,8 +38,10 @@ export function VideoInterview() {
         )}
 
         {/* Right Section - Chat */}
-        <div className={isCameraVisible ? "w-[800px]" : "flex-1 max-w-4xl mx-auto"}>
-          <ChatBox />
+        <div
+          className={isCameraVisible ? "w-[800px]" : "flex-1 max-w-4xl mx-auto"}
+        >
+          <EnhancedChatBox />
         </div>
       </div>
     </div>
