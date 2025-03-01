@@ -7,6 +7,7 @@ import FaceDetectionProctoring from "./FaceDetectionProctoring";
 export function VideoInterview() {
   const [isCameraVisible, setIsCameraVisible] = useState(false);
   const [isInterviewActive, setIsInterviewActive] = useState(true);
+  const [proctoringWarnings, setProctoringWarnings] = useState(0);
 
   const handleEndInterview = () => {
     setIsInterviewActive(false);
@@ -16,6 +17,10 @@ export function VideoInterview() {
     }
   };
 
+  const handleWarningCountChange = (count) => {
+    setProctoringWarnings(count);
+  };
+
   return (
     <div className="container mx-auto h-[calc(100vh-6rem)]">
       <div className={`flex ${isInterviewActive ? 'gap-4' : ''} h-full`}>
@@ -23,7 +28,7 @@ export function VideoInterview() {
         {isInterviewActive && (
           isCameraVisible ? (
             <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <FaceDetectionProctoring />
+              <FaceDetectionProctoring onWarningCountChange={handleWarningCountChange} />
             </div>
           ) : (
             <div className="w-16 flex flex-col items-center my-auto">
@@ -44,6 +49,7 @@ export function VideoInterview() {
         >
           <EnhancedChatBox 
             onEndInterview={handleEndInterview}
+            proctoringWarnings={proctoringWarnings}
           />
         </div>
       </div>

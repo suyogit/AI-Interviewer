@@ -3,13 +3,14 @@ import React, { useRef, useEffect, useState } from "react";
 import * as faceapi from "face-api.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Video, VideoOff } from "lucide-react";
+import { Video, VideoOff, AlertTriangle } from "lucide-react";
 
-const FaceDetectionProctoring = () => {
+const FaceDetectionProctoring = ({ onWarningCountChange }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isVideoOn, setIsVideoOn] = useState(true);
+  const [warningCount, setWarningCount] = useState(0);
   const detectionInterval = useRef(null);
   const streamRef = useRef(null);
   const toastId = useRef(null);
@@ -50,6 +51,13 @@ const FaceDetectionProctoring = () => {
     };
   }, [isVideoOn]);
 
+  // Notify parent component when warning count changes
+  useEffect(() => {
+    if (onWarningCountChange) {
+      onWarningCountChange(warningCount);
+    }
+  }, [warningCount, onWarningCountChange]);
+
   const startFaceDetection = () => {
     if (!videoRef.current || !canvasRef.current) return;
 
@@ -70,6 +78,7 @@ const FaceDetectionProctoring = () => {
         
         // Only show toast if NO face is detected and no toast is currently active
         if (!detections && !toast.isActive(toastId.current)) {
+          setWarningCount(prev => prev + 1);
           toastId.current = toast.error("No face detected. Please ensure you are in view of the camera.", {
             toastId: 'no-face-warning',
             autoClose: 3000, // Toast will automatically close after 3 seconds
@@ -117,6 +126,10 @@ const FaceDetectionProctoring = () => {
           <h2 className="ml-3 font-semibold text-gray-800 dark:text-white">
             Proctoring System
           </h2>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <AlertTriangle size={16} className="text-amber-500" />
+          <span className="text-gray-600 dark:text-gray-300">Warnings: {warningCount}</span>
         </div>
       </div>
       

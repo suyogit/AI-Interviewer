@@ -6,7 +6,7 @@ import { Timer } from "./Timer";
 import { ReportCard } from "./ReportCard";
 import { XCircle } from "lucide-react";
 
-export function EnhancedChatBox() {
+export function EnhancedChatBox({ onEndInterview, proctoringWarnings = 0 }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [interviewState, setInterviewState] = useState(null);
@@ -267,8 +267,8 @@ export function EnhancedChatBox() {
     setIsInterviewActive(false);
     setIsTimerRunning(false);
     // If you need to notify the parent component (VideoInterview)
-    if (props.onEndInterview) {
-      props.onEndInterview();
+    if (onEndInterview) {
+      onEndInterview();
     }
   };
 
@@ -338,9 +338,10 @@ export function EnhancedChatBox() {
         /* Report Card View */
         <div className="h-full overflow-y-auto p-4">
           <ReportCard 
-            categories={interviewState?.categories || ["HTML", "CSS", "JavaScript"]} 
+            categories={interviewState?.categories || ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express", "MongoDB"]} 
             messageCount={messages.filter(m => m.sender === 'user').length}
             messages={messages}
+            proctoringWarnings={proctoringWarnings}
           />
         </div>
       )}
